@@ -2,8 +2,10 @@ package com.example.bullshit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LandingPage extends AppCompatActivity {
@@ -12,16 +14,35 @@ public class LandingPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
 
-        // Display a welcome message
         TextView welcomeText = findViewById(R.id.welcomeText);
-        welcomeText.setText("Welcome to BullShit!");
-
-        // Logout button
         Button logoutButton = findViewById(R.id.logoutButton);
+        Button adminButton = findViewById(R.id.adminButton);
+
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
+        boolean isAdmin = intent.getBooleanExtra("isAdmin", false);
+
+        // Display welcome message with the username
+        welcomeText.setText("Welcome, " + username + "!");
+
+        // Show/hide the admin button based on the isAdmin flag
+        if (isAdmin) {
+            adminButton.setVisibility(View.VISIBLE);
+        } else {
+            adminButton.setVisibility(View.GONE);
+        }
+
+        // Set logout button functionality
         logoutButton.setOnClickListener(v -> {
-            Intent intent = new Intent(LandingPage.this, MainActivity.class);
-            startActivity(intent);
+            Intent logoutIntent = new Intent(LandingPage.this, MainActivity.class);
+            startActivity(logoutIntent);
             finish();
+        });
+
+        // Admin button action
+        adminButton.setOnClickListener(v -> {
+
         });
     }
 }
+
