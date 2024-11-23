@@ -26,20 +26,27 @@ public class LoginActivity extends AppCompatActivity {
                 String username = usernameInput.getText().toString();
                 String password = passwordInput.getText().toString();
 
-                if (username.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                new Thread(() -> {
+                    AppDatabase db = MyApplication.getDatabase();
+                    User user = db.userDAO().getUserByUsername(username);
 
+                    runOnUiThread(() -> {
+                        if (user != null && user.getPassword().equals(password)) {
+                            // Successful login
+                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
 
-                if (username.equals("testuser1") && password.equals("testuser1")) {
-                    Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, LandingPage.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
-                }
+                            // Redirect to LandingPage
+                            Intent intent = new Intent(LoginActivity.this, LandingPage.class);
+                            intent.putExtra("username", user.getUsername());
+                            intent.putExtra("isAdmin", user.isAdmin());
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            // Invalid credentials
+                            Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }).start();
             }
         });
     }
