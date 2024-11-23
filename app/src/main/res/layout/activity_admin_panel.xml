@@ -1,0 +1,58 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Admin Panel"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/viewPlayersButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Players"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/banPlayersButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ban Players"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/monitorLogsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Monitor Game Logs"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/broadcastNotificationsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Broadcast Notifications"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/manageMessagesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manage Chat Messages"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/viewReportsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Reports"
+        android:layout_marginBottom="8dp" />
+</LinearLayout>

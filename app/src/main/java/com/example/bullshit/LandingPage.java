@@ -41,7 +41,8 @@ public class LandingPage extends AppCompatActivity {
 
         // Admin button action
         adminButton.setOnClickListener(v -> {
-
+            Intent adminIntent = new Intent(LandingPage.this, AdminPanelActivity.class);
+            startActivity(adminIntent);
         });
     }
 }
