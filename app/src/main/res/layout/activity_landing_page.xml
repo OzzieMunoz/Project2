@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fce8a0"
     tools:context=".LandingPage">
 
     <TextView
@@ -23,6 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logout"
+        android:backgroundTint="#fc3c1c"
+        android:textColor="#fce8a0"
         app:layout_constraintTop_toBottomOf="@id/welcomeText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,6 +37,8 @@
         android:layout_height="wrap_content"
         android:text="Admin Panel"
         android:visibility="gone"
+        android:backgroundTint="#fc3c1c"
+        android:textColor="#fce8a0"
         app:layout_constraintTop_toBottomOf="@id/logoutButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#fce8a0">
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,6 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View Players"
+        android:backgroundTint="#fc3c1c"
+        android:textColor="#fce8a0"
         android:layout_marginBottom="8dp" />
 
     <Button
@@ -26,6 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ban Players"
+        android:backgroundTint="#fc3c1c"
+        android:textColor="#fce8a0"
         android:layout_marginBottom="8dp" />
 
     <Button
@@ -33,6 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Monitor Game Logs"
+        android:backgroundTint="#fc3c1c"
+        android:textColor="#fce8a0"
         android:layout_marginBottom="8dp" />
 
     <Button
@@ -40,6 +47,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Broadcast Notifications"
+        android:backgroundTint="#fc3c1c"
+        android:textColor="#fce8a0"
         android:layout_marginBottom="8dp" />
 
     <Button
@@ -47,6 +56,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Manage Chat Messages"
+        android:backgroundTint="#fc3c1c"
+        android:textColor="#fce8a0"
         android:layout_marginBottom="8dp" />
 
     <Button
@@ -54,5 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View Reports"
+        android:backgroundTint="#fc3c1c"
+        android:textColor="#fce8a0"
         android:layout_marginBottom="8dp" />
 </LinearLayout>
