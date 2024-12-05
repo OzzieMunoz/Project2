@@ -24,9 +24,10 @@ public class AdminPanelActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        monitorLogsButton.setOnClickListener(v ->
-                Toast.makeText(this, "Feature coming soon: Monitor Game Logs", Toast.LENGTH_SHORT).show()
-        );
+        monitorLogsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminPanelActivity.this, MonitorLogsActivity.class);
+            startActivity(intent);
+        });
 
         broadcastNotificationsButton.setOnClickListener(v ->
                 Toast.makeText(this, "Feature coming soon: Broadcast Notifications", Toast.LENGTH_SHORT).show()
