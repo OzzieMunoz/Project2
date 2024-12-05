@@ -17,6 +17,7 @@ public class LandingPage extends AppCompatActivity {
         TextView welcomeText = findViewById(R.id.welcomeText);
         Button logoutButton = findViewById(R.id.logoutButton);
         Button adminButton = findViewById(R.id.adminButton);
+        Button startGameButton = findViewById(R.id.startGameButton);
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
@@ -43,6 +44,11 @@ public class LandingPage extends AppCompatActivity {
         adminButton.setOnClickListener(v -> {
             Intent adminIntent = new Intent(LandingPage.this, AdminPanelActivity.class);
             startActivity(adminIntent);
+        });
+
+        startGameButton.setOnClickListener(v -> {
+            Intent gameIntent = new Intent(LandingPage.this, GameActivity.class);
+            startActivity(gameIntent);
         });
     }
 }
