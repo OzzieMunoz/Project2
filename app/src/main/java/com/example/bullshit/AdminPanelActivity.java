@@ -19,10 +19,9 @@ public class AdminPanelActivity extends AppCompatActivity {
         Button manageMessagesButton = findViewById(R.id.manageMessagesButton);
         Button viewReportsButton = findViewById(R.id.viewReportsButton);
 
-        // Add click listener for Manage Players button
         managePlayersButton.setOnClickListener(v -> {
-            // TODO: Navigate to a new activity or implement a dialog for managing players
-            Toast.makeText(this, "Feature coming soon: Manage Players", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(AdminPanelActivity.this, ManagePlayersActivity.class);
+            startActivity(intent);
         });
 
         monitorLogsButton.setOnClickListener(v ->
