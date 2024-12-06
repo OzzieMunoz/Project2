@@ -16,7 +16,6 @@ public class AdminPanelActivity extends AppCompatActivity {
         Button managePlayersButton = findViewById(R.id.managePlayersButton);
         Button monitorLogsButton = findViewById(R.id.monitorLogsButton);
         Button broadcastNotificationsButton = findViewById(R.id.broadcastNotificationsButton);
-        Button manageMessagesButton = findViewById(R.id.manageMessagesButton);
         Button viewReportsButton = findViewById(R.id.viewReportsButton);
 
         managePlayersButton.setOnClickListener(v -> {
@@ -31,10 +30,6 @@ public class AdminPanelActivity extends AppCompatActivity {
 
         broadcastNotificationsButton.setOnClickListener(v ->
                 Toast.makeText(this, "Feature coming soon: Broadcast Notifications", Toast.LENGTH_SHORT).show()
-        );
-
-        manageMessagesButton.setOnClickListener(v ->
-                Toast.makeText(this, "Feature coming soon: Manage Chat Messages", Toast.LENGTH_SHORT).show()
         );
 
         viewReportsButton.setOnClickListener(v ->

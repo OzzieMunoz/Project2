@@ -44,15 +44,6 @@
         android:layout_marginBottom="8dp" />
 
     <Button
-        android:id="@+id/manageMessagesButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Manage Chat Messages"
-        android:backgroundTint="#fc3c1c"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="8dp" />
-
-    <Button
         android:id="@+id/viewReportsButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
