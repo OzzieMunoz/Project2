@@ -28,6 +28,7 @@
         <activity android:name=".AdminPanelActivity" />
         <activity android:name=".ManagePlayersActivity" />
         <activity android:name=".MonitorLogsActivity" />
+        <activity android:name=".NewsPageActivity" />
 
     </application>
 </manifest>
