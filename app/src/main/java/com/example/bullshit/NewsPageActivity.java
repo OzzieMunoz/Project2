@@ -1,10 +1,13 @@
 package com.example.bullshit;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class NewsPageActivity extends AppCompatActivity {
     @Override
@@ -14,15 +17,19 @@ public class NewsPageActivity extends AppCompatActivity {
 
         TextView newsTextView = findViewById(R.id.newsTextView);
 
-        // Sample notifications
-        ArrayList<String> notifications = new ArrayList<>();
-        notifications.add("Small Update / Patch Notes");
-        notifications.add("Update 1.0.1");
+        SharedPreferences prefs = getSharedPreferences("Announcements", MODE_PRIVATE);
+        String announcementsJson = prefs.getString("allAnnouncements", "[]");
 
-        // Display the notifications
+        // Display announcements
         StringBuilder newsBuilder = new StringBuilder();
-        for (String notification : notifications) {
-            newsBuilder.append(notification).append("\n\n");
+        try {
+            JSONArray announcementsArray = new JSONArray(announcementsJson);
+            for (int i = 0; i < announcementsArray.length(); i++) {
+                newsBuilder.append(announcementsArray.getString(i)).append("\n\n");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            newsBuilder.append("Error loading announcements!");
         }
 
         newsTextView.setText(newsBuilder.toString());

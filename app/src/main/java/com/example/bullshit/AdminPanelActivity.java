@@ -28,9 +28,10 @@ public class AdminPanelActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        broadcastNotificationsButton.setOnClickListener(v ->
-                Toast.makeText(this, "Feature coming soon: Broadcast Notifications", Toast.LENGTH_SHORT).show()
-        );
+        broadcastNotificationsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminPanelActivity.this, CreateAnnouncementActivity.class);
+            startActivity(intent);
+        });
 
         viewReportsButton.setOnClickListener(v ->
                 Toast.makeText(this, "Feature coming soon: View Reports", Toast.LENGTH_SHORT).show()
