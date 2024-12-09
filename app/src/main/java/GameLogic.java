@@ -20,7 +20,7 @@ public class GameLogic {
                 players.add(player);
 
                 if (players.size() >= MIN_PLAYERS) {
-                    System.out.println("Minimum players connected. Game can start.");
+                    System.out.println("Minimum players have connected. Game can start.");
                 }
             }
             new GameLogic().startGame();
@@ -50,10 +50,10 @@ public class GameLogic {
 
                 if (card != null) {
                     pile.add(card);
-                    broadcast(currentPlayer.getName() + " played a card.");
+                    broadcast(currentPlayer.getName() + " has played a card.");
                     allowChallenges(currentPlayer);
                 } else {
-                    currentPlayer.sendMessage("Invalid card. Try again.");
+                    currentPlayer.sendMessage("Invalid card. please try again.");
                     continue;
                 }
             }
