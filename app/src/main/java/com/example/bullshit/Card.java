@@ -1,6 +1,8 @@
 package com.example.bullshit;
 
-public class Card {
+import java.io.Serializable;
+
+public class Card implements Serializable {
     private int number;
     private String color;
 
@@ -13,16 +15,8 @@ public class Card {
         return number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
     public String getColor() {
         return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     @Override

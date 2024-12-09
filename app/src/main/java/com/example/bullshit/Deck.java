@@ -22,8 +22,8 @@ public class Deck implements Serializable {
     public List<List<Card>> dealCards() {
         List<List<Card>> playerCards = new ArrayList<>();
         int half = cards.size()/2;
-        List<Card> userHand = cards.subList(0, half);
-        List<Card> botHand = cards.subList(half, cards.size());
+        List<Card> userHand = new ArrayList<>(cards.subList(0, half));
+        List<Card> botHand = new ArrayList<>(cards.subList(half, cards.size()));
         playerCards.add(userHand);
         playerCards.add(botHand);
         return playerCards;
