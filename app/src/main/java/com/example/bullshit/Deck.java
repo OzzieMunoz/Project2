@@ -19,7 +19,7 @@ public class Deck implements Serializable {
         Collections.shuffle(cards);
     }
 
-    public List<Card> dealCards(int playerCount, int cardCount) {
+    public List<List<Card>> dealCards(int playerCount, int cardCount) {
         List<List<Card>> playerCards = new ArrayList<>();
         for (int i = 0; i < playerCount; i++) {
             List<Card> playerHand = new ArrayList<>();
@@ -30,6 +30,10 @@ public class Deck implements Serializable {
             }
             playerCards.add(playerHand);
         }
-        return playerCards.get(0);
+        return playerCards;
+    }
+
+    public List<Card> getRemainingCards() {
+        return cards;
     }
 }
