@@ -19,21 +19,13 @@ public class Deck implements Serializable {
         Collections.shuffle(cards);
     }
 
-    public List<List<Card>> dealCards(int playerCount, int cardCount) {
+    public List<List<Card>> dealCards() {
         List<List<Card>> playerCards = new ArrayList<>();
-        for (int i = 0; i < playerCount; i++) {
-            List<Card> playerHand = new ArrayList<>();
-            for (int k = 0; k < cardCount; k++) {
-                if (!cards.isEmpty()) {
-                    playerHand.add(cards.remove(0));
-                }
-            }
-            playerCards.add(playerHand);
-        }
+        int half = cards.size()/2;
+        List<Card> userHand = cards.subList(0, half);
+        List<Card> botHand = cards.subList(half, cards.size());
+        playerCards.add(userHand);
+        playerCards.add(botHand);
         return playerCards;
-    }
-
-    public List<Card> getRemainingCards() {
-        return cards;
     }
 }
