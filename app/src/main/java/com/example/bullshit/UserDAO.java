@@ -19,4 +19,7 @@ public interface UserDAO {
 
     @Query("SELECT * FROM users")
     List<User> getAllUsers();
+
+    @Query("SELECT * FROM users WHERE isAdmin = 0")
+    List<User> getNonAdminUsers();
 }

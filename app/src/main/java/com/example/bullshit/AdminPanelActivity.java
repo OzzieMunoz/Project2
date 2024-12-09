@@ -1,5 +1,6 @@
 package com.example.bullshit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
@@ -12,36 +13,29 @@ public class AdminPanelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_panel);
 
         // Link buttons with their IDs
-        Button viewPlayersButton = findViewById(R.id.viewPlayersButton);
-        Button banPlayersButton = findViewById(R.id.banPlayersButton);
+        Button managePlayersButton = findViewById(R.id.managePlayersButton);
         Button monitorLogsButton = findViewById(R.id.monitorLogsButton);
         Button broadcastNotificationsButton = findViewById(R.id.broadcastNotificationsButton);
-        Button manageMessagesButton = findViewById(R.id.manageMessagesButton);
         Button viewReportsButton = findViewById(R.id.viewReportsButton);
 
-        // Add click listeners for each button
-        viewPlayersButton.setOnClickListener(v ->
-                Toast.makeText(this, "Feature coming soon: View Players", Toast.LENGTH_SHORT).show()
-        );
+        managePlayersButton.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminPanelActivity.this, ManagePlayersActivity.class);
+            startActivity(intent);
+        });
 
-        banPlayersButton.setOnClickListener(v ->
-                Toast.makeText(this, "Feature coming soon: Ban Players", Toast.LENGTH_SHORT).show()
-        );
+        monitorLogsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminPanelActivity.this, MonitorLogsActivity.class);
+            startActivity(intent);
+        });
 
-        monitorLogsButton.setOnClickListener(v ->
-                Toast.makeText(this, "Feature coming soon: Monitor Game Logs", Toast.LENGTH_SHORT).show()
-        );
+        broadcastNotificationsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminPanelActivity.this, CreateAnnouncementActivity.class);
+            startActivity(intent);
+        });
 
-        broadcastNotificationsButton.setOnClickListener(v ->
-                Toast.makeText(this, "Feature coming soon: Broadcast Notifications", Toast.LENGTH_SHORT).show()
-        );
-
-        manageMessagesButton.setOnClickListener(v ->
-                Toast.makeText(this, "Feature coming soon: Manage Chat Messages", Toast.LENGTH_SHORT).show()
-        );
-
-        viewReportsButton.setOnClickListener(v ->
-                Toast.makeText(this, "Feature coming soon: View Reports", Toast.LENGTH_SHORT).show()
-        );
+        viewReportsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminPanelActivity.this, ViewReportsActivity.class);
+            startActivity(intent);
+        });
     }
 }

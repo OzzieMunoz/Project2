@@ -20,11 +20,18 @@ public class MyApplication extends Application {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
-                        // Prepopulate the database
                         new Thread(() -> {
                             AppDatabase appDatabase = getDatabase();
-                            appDatabase.userDAO().insertUser(new User("testuser1", "testuser1", false));
+
+                            // Add predefined admin user
                             appDatabase.userDAO().insertUser(new User("admin2", "admin2", true));
+
+                            // Add predefined non-admin users
+                            appDatabase.userDAO().insertUser(new User("testuser1", "testuser1", false));
+                            appDatabase.userDAO().insertUser(new User("testuser2", "testuser2", false));
+                            appDatabase.userDAO().insertUser(new User("testuser3", "testuser3", false));
+                            appDatabase.userDAO().insertUser(new User("testuser4", "testuser4", false));
+                            appDatabase.userDAO().insertUser(new User("testuser5", "testuser5", false));
                         }).start();
                     }
                 })

@@ -17,6 +17,8 @@ public class LandingPage extends AppCompatActivity {
         TextView welcomeText = findViewById(R.id.welcomeText);
         Button logoutButton = findViewById(R.id.logoutButton);
         Button adminButton = findViewById(R.id.adminButton);
+        Button newsPageButton = findViewById(R.id.newsPageButton);
+        Button reportIssuesButton = findViewById(R.id.reportIssuesButton);
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
@@ -43,6 +45,18 @@ public class LandingPage extends AppCompatActivity {
         adminButton.setOnClickListener(v -> {
             Intent adminIntent = new Intent(LandingPage.this, AdminPanelActivity.class);
             startActivity(adminIntent);
+        });
+
+        // News Page button action
+        newsPageButton.setOnClickListener(v -> {
+            Intent newsIntent = new Intent(LandingPage.this, NewsPageActivity.class);
+            startActivity(newsIntent);
+        });
+
+        // Report Issues button action
+        reportIssuesButton.setOnClickListener(v -> {
+            Intent reportIntent = new Intent(LandingPage.this, ReportPageActivity.class);
+            startActivity(reportIntent);
         });
     }
 }

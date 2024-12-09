@@ -26,6 +26,12 @@
         <activity android:name=".LandingPage" />
         <activity android:name=".MyApplication" />
         <activity android:name=".AdminPanelActivity" />
+        <activity android:name=".ManagePlayersActivity" />
+        <activity android:name=".MonitorLogsActivity" />
+        <activity android:name=".NewsPageActivity" />
+        <activity android:name=".CreateAnnouncementActivity" />
+        <activity android:name=".ReportPageActivity" />
+        <activity android:name=".ViewReportsActivity" />
 
     </application>
 </manifest>
