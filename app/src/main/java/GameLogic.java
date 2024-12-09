@@ -44,9 +44,9 @@ public class GameLogic {
             }
 
             if (action.startsWith("play:")) {
-                String[] parts = action.split(":");
-                String cardName = parts[1];
-                Card card = currentPlayer.playCard(cardName);
+                    String[] parts = action.split(":");
+                    String cardName = parts[1];
+                    Card card = currentPlayer.playCard(cardName);
 
                 if (card != null) {
                     pile.add(card);
@@ -114,5 +114,131 @@ public class GameLogic {
             }
         }, 10000);
     }
+
+    private void handleBluff(Player challenger, Player lastPlayer) throws IOException {
+        broadcast(challenger.getName() + " called bluff on " + lastPlayer.getName());
+
+        if (lastPlayer.isBluffing()) {
+            lastPlayer.addToHand(pile);
+            pile.clear();
+            broadcast(lastPlayer.getName() + " was bluffing and picked up the pile!");
+        } else {
+            challenger.addToHand(pile);
+            pile.clear();
+            broadcast(challenger.getName() + " was wrong and picked up the pile!");
+        }
+    }
+
+    private void distributeCards() {
+        int cardsPerPlayer = deck.size() / players.size();
+        for (Player player : players) {
+            player.setHand(deck.draw(cardsPerPlayer));
+        }
+    }
+
+    private void nextPlayer() {
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+    }
+
+    private void broadcast(String message) throws IOException {
+        for (Player player : players) {
+            player.sendMessage(message);
+        }
+    }
 }
 
+class Player {
+    private String name;
+    private Socket socket;
+    private BufferedReader in;
+    private PrintWriter out;
+    private List<Card> hand;
+
+    public Player(Socket socket) throws IOException {
+        this.socket = socket;
+        this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        this.out = new PrintWriter(socket.getOutputStream(), true);
+        this.name = in.readLine();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setHand(List<Card> hand) {
+        this.hand = hand;
+    }
+
+    public int getHandSize() {
+        return hand.size();
+    }
+
+    public void addToHand(List<Card> cards) {
+        hand.addAll(cards);
+    }
+
+    public Card playCard(String cardName) {
+        for (Card card : hand) {
+            if (card.toString().equalsIgnoreCase(cardName)) {
+                hand.remove(card);
+                return card;
+            }
+        }
+        return null;
+    }
+
+    public boolean isBluffing() {
+        return Math.random() > 0.5;
+    }
+
+    public void sendMessage(String message) {
+        out.println(message);
+    }
+
+    public String readMessage() throws IOException {
+        return in.readLine();
+    }
+}
+
+class Deck {
+    private List<Card> cards = new ArrayList<>();
+
+    public Deck() {
+        String[] suits = {"Red", "Blue", "Green", "Yellow"};
+        String[] ranks = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"};
+        for (String suit : suits) {
+            for (String rank : ranks) {
+                cards.add(new Card(rank, suit));
+            }
+        }
+    }
+
+    public void shuffle() {
+        Collections.shuffle(cards);
+    }
+
+    public List<Card> draw(int count) {
+        List<Card> hand = new ArrayList<>(cards.subList(0, count));
+        cards.subList(0, count).clear();
+        return hand;
+    }
+
+    public int size() {
+        return cards.size();
+    }
+}
+
+class Card {
+    private String rank;
+    private String suit;
+
+    public Card(String rank, String suit) {
+        this.rank = rank;
+        this.suit = suit;
+    }
+
+    @Override
+    public String toString() {
+        return rank + " of " + suit;
+    }
+}
