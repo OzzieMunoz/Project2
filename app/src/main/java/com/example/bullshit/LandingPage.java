@@ -56,9 +56,11 @@ public class LandingPage extends AppCompatActivity {
             Deck deck = new Deck();
             List<List<Card>> playerCards = deck.dealCards();
             List<Card> userCards = playerCards.get(0);
-            if (userCards != null) {
+            List<Card> botCards = playerCards.get(1);
+            if (userCards != null && botCards != null) {
                 Intent gameIntent = new Intent(LandingPage.this, GameActivity.class);
                 gameIntent.putExtra("userCards", (Serializable) userCards);
+                gameIntent.putExtra("botCards", (Serializable) botCards);
                 startActivity(gameIntent);
             } else {
                 Toast.makeText(LandingPage.this, "Error: No cards dealt", Toast.LENGTH_SHORT).show();
