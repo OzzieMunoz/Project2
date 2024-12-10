@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.Serializable;
+import java.util.List;
 
 public class LandingPage extends AppCompatActivity {
     @Override
@@ -19,7 +23,7 @@ public class LandingPage extends AppCompatActivity {
         Button adminButton = findViewById(R.id.adminButton);
         Button newsPageButton = findViewById(R.id.newsPageButton);
         Button reportIssuesButton = findViewById(R.id.reportIssuesButton);
-        Button playGameButton = findViewById(R.id.playGameButton);  // Add this line
+        Button startGameButton = findViewById(R.id.startGameButton);
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
@@ -48,23 +52,22 @@ public class LandingPage extends AppCompatActivity {
             startActivity(adminIntent);
         });
 
-        // News Page button action
-        newsPageButton.setOnClickListener(v -> {
-            Intent newsIntent = new Intent(LandingPage.this, NewsPageActivity.class);
-            startActivity(newsIntent);
-        });
+        startGameButton.setOnClickListener(v -> {
+            Toast.makeText(LandingPage.this, "Starting game...", Toast.LENGTH_SHORT).show();
 
-        // Report Issues button action
-        reportIssuesButton.setOnClickListener(v -> {
-            Intent reportIntent = new Intent(LandingPage.this, ReportPageActivity.class);
-            startActivity(reportIntent);
-        });
-
-        // Add Play Game button action
-        playGameButton.setOnClickListener(v -> {
-            Intent gameIntent = new Intent(LandingPage.this, GameRoomActivity.class);
-            gameIntent.putExtra("PLAYER_NAME", username);  // Pass the username as player name
-            startActivity(gameIntent);
+            Deck deck = new Deck();
+            List<List<Card>> playerCards = deck.dealCards();
+            List<Card> userCards = playerCards.get(0);
+            List<Card> botCards = playerCards.get(1);
+            if (userCards != null && botCards != null) {
+                Intent gameIntent = new Intent(LandingPage.this, GameActivity.class);
+                gameIntent.putExtra("userCards", (Serializable) userCards);
+                gameIntent.putExtra("botCards", (Serializable) botCards);
+                startActivity(gameIntent);
+            } else {
+                Toast.makeText(LandingPage.this, "Error: No cards dealt", Toast.LENGTH_SHORT).show();
+            }
         });
     }
+
 }
