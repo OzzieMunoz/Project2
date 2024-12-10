@@ -23,6 +23,7 @@ public class GameActivity extends AppCompatActivity {
     private List<Card> playedPile;
     private List<CheckBox> cardCheckBoxes;
     private boolean isBotTurn = false;
+    private int botCardsPlayed = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,12 @@ public class GameActivity extends AppCompatActivity {
         cardsToPlay = 4;
         cardCheckBoxes = new ArrayList<>();
 
+        Button playCardButton = findViewById(R.id.playCardButton);
+        Button callBluffButton = findViewById(R.id.callBluffButton);
+        playCardButton.setOnClickListener(v -> playCards());
+        callBluffButton.setOnClickListener(v -> callBluff());
+
+
         userCards = (List<Card>) getIntent().getSerializableExtra("userCards");
         botCards = (List<Card>) getIntent().getSerializableExtra("botCards");
 
@@ -43,9 +50,6 @@ public class GameActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "No cards received", Toast.LENGTH_SHORT).show();
         }
-
-        Button playCardButton = findViewById(R.id.playCardButton);
-        playCardButton.setOnClickListener(v -> playCards());
     }
 
     private void playCards() {
@@ -87,6 +91,7 @@ public class GameActivity extends AppCompatActivity {
         int botPlayedCardCount;
         botPlayedCardCount = (int) (Math.random() * 4) + 1;
         botPlayedCardCount = Math.min(botPlayedCardCount, botCards.size());
+        botCardsPlayed = botPlayedCardCount;
         if (botPlayedCardCount > 0) {
             List<Card> cardsPlayed = new ArrayList<>();
 
@@ -110,6 +115,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         cardsToPlay = cardNumberPlayed;
+        botCardsPlayed = 0;
 
         if (turn % 2 == 1) {
             isBotTurn = false;
@@ -159,5 +165,18 @@ public class GameActivity extends AppCompatActivity {
             }
         }
         return correctCount;
+    }
+
+    private void callBluff() {
+        if (botCardsPlayed != cardNumberPlayed) {
+            Toast.makeText(this, "Bluff called! The bot was bluffing!", Toast.LENGTH_SHORT).show();
+            botCards.addAll(playedPile);
+            playedPile.clear();
+        } else {
+            Toast.makeText(this, "Bluff failed! The bot was truthful.", Toast.LENGTH_SHORT).show();
+            userCards.addAll(playedPile);
+            playedPile.clear();
+        }
+        nextTurn();
     }
 }
