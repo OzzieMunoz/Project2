@@ -19,6 +19,7 @@ public class LandingPage extends AppCompatActivity {
         Button adminButton = findViewById(R.id.adminButton);
         Button newsPageButton = findViewById(R.id.newsPageButton);
         Button reportIssuesButton = findViewById(R.id.reportIssuesButton);
+        Button playGameButton = findViewById(R.id.playGameButton);  // Add this line
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
@@ -58,6 +59,12 @@ public class LandingPage extends AppCompatActivity {
             Intent reportIntent = new Intent(LandingPage.this, ReportPageActivity.class);
             startActivity(reportIntent);
         });
+
+        // Add Play Game button action
+        playGameButton.setOnClickListener(v -> {
+            Intent gameIntent = new Intent(LandingPage.this, GameRoomActivity.class);
+            gameIntent.putExtra("PLAYER_NAME", username);  // Pass the username as player name
+            startActivity(gameIntent);
+        });
     }
 }
-
