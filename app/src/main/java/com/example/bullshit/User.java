@@ -52,4 +52,14 @@ public class User {
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
+
+    private boolean isBanned;
+
+    public boolean isBanned() {
+        return isBanned;
+    }
+
+    public void setBanned(boolean banned) {
+        isBanned = banned;
+    }
 }

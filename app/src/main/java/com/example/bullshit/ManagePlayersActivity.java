@@ -34,4 +34,22 @@ public class ManagePlayersActivity extends AppCompatActivity {
             });
         }).start();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadPlayers();
+    }
+
+    private void loadPlayers() {
+        new Thread(() -> {
+            AppDatabase db = MyApplication.getDatabase();
+            List<User> players = db.userDAO().getNonAdminUsers();
+            runOnUiThread(() -> {
+                RecyclerView playersRecyclerView = findViewById(R.id.playersRecyclerView);
+                PlayersAdapter adapter = new PlayersAdapter(players);
+                playersRecyclerView.setAdapter(adapter);
+            });
+        }).start();
+    }
 }
