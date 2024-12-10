@@ -84,10 +84,13 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void botPlayCards() {
-        if (botCards.size() >= cardsToPlay) {
+        int botPlayedCardCount;
+        botPlayedCardCount = (int) (Math.random() * 4) + 1;
+        botPlayedCardCount = Math.min(botPlayedCardCount, botCards.size());
+        if (botPlayedCardCount > 0) {
             List<Card> cardsPlayed = new ArrayList<>();
 
-            for (int i = 0; i < cardsToPlay; i++) {
+            for (int i = 0; i < botPlayedCardCount; i++) {
                 cardsPlayed.add(botCards.get(i));
             }
             botCards.removeAll(cardsPlayed);
