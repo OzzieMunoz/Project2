@@ -30,20 +30,24 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.PlayerVi
     public void onBindViewHolder(@NonNull PlayerViewHolder holder, int position) {
         User player = players.get(position);
 
-        // Log binding
-        System.out.println("Binding player: " + player.getUsername());
-
         holder.usernameTextView.setText(player.getUsername());
 
-        holder.banButton.setOnClickListener(v -> {
-            Toast.makeText(holder.itemView.getContext(),
-                    "Banned " + player.getUsername(),
-                    Toast.LENGTH_SHORT).show();
+        holder.banButton.setText(player.isBanned() ? "Unban" : "Ban");
 
-            // Remove the player from the list
-            players.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, players.size());
+        holder.banButton.setOnClickListener(v -> {
+            boolean isCurrentlyBanned = player.isBanned();
+            player.setBanned(!isCurrentlyBanned);
+
+            new Thread(() -> {
+                AppDatabase db = MyApplication.getDatabase();
+                db.userDAO().updateUser(player);
+            }).start();
+
+            holder.banButton.setText(player.isBanned() ? "Unban" : "Ban");
+
+            Toast.makeText(holder.itemView.getContext(),
+                    (player.isBanned() ? "Banned " : "Unbanned ") + player.getUsername(),
+                    Toast.LENGTH_SHORT).show();
         });
     }
 

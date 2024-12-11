@@ -13,7 +13,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Set up the Login button
         findViewById(R.id.loginButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -23,12 +22,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Set up the Create Account button
-        findViewById(R.id.createAccountButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Placeholder for future account creation functionality
-            }
+        findViewById(R.id.createAccountButton).setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, CreateAccountActivity.class);
+            startActivity(intent);
         });
+
     }
 }

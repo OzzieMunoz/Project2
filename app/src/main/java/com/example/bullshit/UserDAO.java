@@ -3,6 +3,7 @@ package com.example.bullshit;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -22,4 +23,7 @@ public interface UserDAO {
 
     @Query("SELECT * FROM users WHERE isAdmin = 0")
     List<User> getNonAdminUsers();
+
+    @Update
+    void updateUser(User user);
 }

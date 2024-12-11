@@ -31,19 +31,25 @@ public class LoginActivity extends AppCompatActivity {
                     User user = db.userDAO().getUserByUsername(username);
 
                     runOnUiThread(() -> {
-                        if (user != null && user.getPassword().equals(password)) {
-                            // Successful login
-                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                        if (user != null) {
+                            if (user.isBanned()) {
+                                Toast.makeText(LoginActivity.this, "This account is banned", Toast.LENGTH_SHORT).show();
+                            } else if (user.getPassword().equals(password)) {
+                                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
 
-                            // Redirect to LandingPage
-                            Intent intent = new Intent(LoginActivity.this, LandingPage.class);
-                            intent.putExtra("username", user.getUsername());
-                            intent.putExtra("isAdmin", user.isAdmin());
-                            startActivity(intent);
-                            finish();
+                                // Redirect to LandingPage
+                                Intent intent = new Intent(LoginActivity.this, LandingPage.class);
+                                intent.putExtra("username", user.getUsername());
+                                intent.putExtra("isAdmin", user.isAdmin());
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                // Invalid credentials
+                                Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            // Invalid credentials
-                            Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
+                            // User does not exist
+                            Toast.makeText(LoginActivity.this, "User does not exist", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }).start();
