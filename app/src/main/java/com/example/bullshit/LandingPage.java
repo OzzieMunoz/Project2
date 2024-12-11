@@ -68,6 +68,16 @@ public class LandingPage extends AppCompatActivity {
                 Toast.makeText(LandingPage.this, "Error: No cards dealt", Toast.LENGTH_SHORT).show();
             }
         });
+
+        reportIssuesButton.setOnClickListener(v -> {
+            Intent reportIntent = new Intent(LandingPage.this, ReportPageActivity.class);
+            startActivity(reportIntent);
+        });
+
+        newsPageButton.setOnClickListener(v -> {
+            Intent newsIntent = new Intent(LandingPage.this, NewsPageActivity.class);
+            startActivity(newsIntent);
+        });
     }
 
 }
